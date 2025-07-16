@@ -12,4 +12,8 @@ export class AddVacancy {
     @IsNotEmpty()
     @IsString()
     description : string
+
+    @IsNotEmpty()
+    @IsString()
+    location : string
 }

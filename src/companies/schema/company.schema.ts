@@ -78,6 +78,11 @@ export class Vacancy{
 
     @Prop({
         type : String,
+        required : true,
+    })
+    location : string
+    @Prop({
+        type : String,
         required : false,
         default : 'pending'
     })

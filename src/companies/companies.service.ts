@@ -26,4 +26,19 @@ export class CompaniesService {
 
       return {message : 'vacancy successfully added , now you should wait for the admin until he approves your vacancy' , addedVacancy : newVanacy}
   }
+
+  async deleteVacancy(vacancyId : string , companyId : string){
+    if(!isValidObjectId(vacancyId)) throw new BadRequestException("invalid id")
+    if(!isValidObjectId(companyId)) throw new BadRequestException("invalid id")
+
+      const vacancy = await this.vacancyModel.findById(vacancyId)
+
+      if(!vacancy) throw new BadRequestException("vacancy not found")
+
+      if(vacancy.company.toString() !== companyId) throw new BadRequestException("you can't delete other companies vacancy")
+        
+      const deletedVacancy =  await this.vacancyModel.findByIdAndDelete(vacancyId)
+      return {message : "vacancy deleted succesfully" , deletedVacancy}
+  }
+
 }

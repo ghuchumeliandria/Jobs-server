@@ -20,4 +20,9 @@ export class CompaniesController {
   addVacancy(@Body() addVacany : AddVacancy , @UserId() companyId : number ){
     return  this.companiesService.addVacancy(companyId , addVacany)
   }
+
+  @Delete('vacancy-delete/:id')
+  vacancyDelete(@Param('id') vacancyId : string , @UserId() companyId ){
+    return this.companiesService.deleteVacancy(vacancyId , companyId)
+  }
 }

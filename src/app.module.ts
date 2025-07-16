@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { CompaniesModule } from './companies/companies.module';
 import { AdminModule } from './admin/admin.module';
-import { VanaciesModule } from './vanacies/vanacies.module';
+import { VanaciesModule } from './vacancies/vacancies.module';
 
 @Module({
   imports: [
