@@ -14,6 +14,11 @@ export class AdminController {
     return this.adminService.getAllCompanies(status)
   }
 
+  @Get("users")
+  getUsers(){
+    return this.adminService.getUsers()
+  }
+
   @Patch('company-approval/:id')
   companyApproval(@Param('id') companyId : string , @Body() status : companyApproval ){
     return this.adminService.companyApproval(status , companyId)

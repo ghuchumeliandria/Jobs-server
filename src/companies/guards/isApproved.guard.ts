@@ -5,6 +5,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model } from "mongoose";
 import { User } from "src/users/schema/users.schema";
 import { Company } from "../schema/company.schema";
+import { IncomingHttpHeaders } from "http";
 @Injectable()
 export class IsApproved implements CanActivate {
     constructor(
@@ -29,7 +30,7 @@ export class IsApproved implements CanActivate {
 
     }
 
-    getTokenFromHeaders(headers){
+    getTokenFromHeaders(headers : IncomingHttpHeaders){
         const authorization = headers["authorization"]
         
         if(!authorization) return false

@@ -1,5 +1,6 @@
 import { BadRequestException, CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { IncomingHttpHeaders } from "http";
 import { Observable } from "rxjs";
 @Injectable()
 export class IsCompany implements CanActivate {
@@ -18,7 +19,7 @@ export class IsCompany implements CanActivate {
             return true
          }
 
-        getTokenFromHeaders(headers){
+        getTokenFromHeaders(headers : IncomingHttpHeaders){
          const authorization = headers["authorization"]
 
          if(!authorization) return null

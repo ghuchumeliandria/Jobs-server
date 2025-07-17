@@ -96,9 +96,16 @@ export class Vacancy{
     company: mongoose.Schema.Types.ObjectId;
 
     @Prop({
-        type: [String],
+        type: [{
+            file: String,
+            user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+        }],
+        default : []
     })
-    resumes: string[];
+    resumes: {
+        file: string;
+        user: mongoose.Schema.Types.ObjectId;
+      }[];
 }
 
 export const companySchema = SchemaFactory.createForClass(Company)

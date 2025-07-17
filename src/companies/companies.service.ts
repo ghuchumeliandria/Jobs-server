@@ -3,6 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { Company, Vacancy } from './schema/company.schema';
 import { AddVacancy } from './dto/addVacancy.dto';
+import { UpdateVacancy } from './dto/updateVacancy.dto';
+import { companyApproval } from './dto/companyApproval.dto';
+import { Status } from 'src/dto/status.dto';
 @Injectable()
 export class CompaniesService {
   
@@ -16,29 +19,50 @@ export class CompaniesService {
     return await this.companyModel.findById(id)
   }
 
-  async addVacancy(companyId : number , {name, sallery , description} : AddVacancy){
-    if(!name || !sallery  || !description) throw new BadRequestException("fields are required")
+  async addVacancy(companyId : number , {name, sallery , description , location} : AddVacancy){
+    if(!name || !sallery  || !description || !location) throw new BadRequestException("fields are required")
       if(!isValidObjectId(companyId)) throw new BadRequestException("invalid id")
 
-      const newVanacy = await this.vacancyModel.create({name , sallery , description , company : companyId})
+      const newVanacy = await this.vacancyModel.create({name , sallery , description , location ,  company : companyId})
 
       await this.companyModel.findByIdAndUpdate(companyId , {$push :{ vacansies : newVanacy.id}})
 
       return {message : 'vacancy successfully added , now you should wait for the admin until he approves your vacancy' , addedVacancy : newVanacy}
   }
 
-  async deleteVacancy(vacancyId : string , companyId : string){
-    if(!isValidObjectId(vacancyId)) throw new BadRequestException("invalid id")
+  async deleteVacancy(vacancyId : string , companyId : string){  
+          await this.companyModel.updateOne({_id : companyId} , { $pull : {vacansies : vacancyId}  }) 
+          const deletedVacancy =  await this.vacancyModel.findByIdAndDelete(vacancyId)
+      
+      return {message : "vacancy deleted succesfully" , deletedVacancy}
+  }
+
+  async vacancyUpdate(vacancyId : string , {name , description , sallery , location} : UpdateVacancy){
+
+    if(!name && !description && !sallery && !location) throw new BadRequestException("You are not allowed to update the vacancy without specifying the changes to be made")
+
+    const vacancy = await this.vacancyModel.findByIdAndUpdate(vacancyId ,{name , description , sallery , location} , {new : true})
+
+    return{ message : "vacancy successfully updated" , vacancy}
+  }
+
+  async companyVacancies(companyId : string , {status} : Status){
     if(!isValidObjectId(companyId)) throw new BadRequestException("invalid id")
 
-      const vacancy = await this.vacancyModel.findById(vacancyId)
+    const company =  await  this.companyModel.findById(companyId).populate("vacansies")
+    if(!company) throw new BadRequestException("company not found")
 
-      if(!vacancy) throw new BadRequestException("vacancy not found")
+      if(!status) return company.vacansies
 
-      if(vacancy.company.toString() !== companyId) throw new BadRequestException("you can't delete other companies vacancy")
-        
-      const deletedVacancy =  await this.vacancyModel.findByIdAndDelete(vacancyId)
-      return {message : "vacancy deleted succesfully" , deletedVacancy}
+      if(status) {
+       const company = await this.companyModel.findById(companyId).populate({
+        path : "vacansies",
+        match : {status }
+       }).select('vacansies')
+        return company
+      } 
+
+    
   }
 
 }

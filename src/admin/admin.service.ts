@@ -3,22 +3,27 @@ import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { companyApproval } from 'src/companies/dto/companyApproval.dto';
 import { Company, Vacancy } from 'src/companies/schema/company.schema';
+import { User } from 'src/users/schema/users.schema';
 
 @Injectable()
 export class AdminService {
     constructor(
         @InjectModel('company') private companyModel : Model<Company>,
-        @InjectModel('vacancy') private vacancyModel : Model<Vacancy>
+        @InjectModel('vacancy') private vacancyModel : Model<Vacancy>,
+        @InjectModel('user') private userModel : Model<User>
     ){}
 
-    async getAllCompanies(status : companyApproval){
-        const companies = await this.companyModel.find()
-        if(!status) return false
-        console.log(status)
+    async getAllCompanies({status} : companyApproval){
+        
+        if(!status ) return await this.companyModel.find()
         if(status) {
-            return await this.companyModel.find(status)
+            return await this.companyModel.find({status})
         }
-        return companies
+           
+    }
+
+    async getUsers(){
+        return await this.userModel.find()
     }
 
     async companyApproval({status} : companyApproval, companyId : string){
