@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { VanaciesService } from './vacancies.service';
 import { IsAuthGuard } from 'src/auth/guards/isAuth.guard';
 import { VacancyFilter } from './dto/vacancyFilter.dto';
 import { PDF } from './dto/pdf.dto';
 import { UserId } from 'src/decorators/userOrCompanyId';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('vacancies')
 @UseGuards(IsAuthGuard)
@@ -15,7 +16,18 @@ export class VanaciesController {
     return this.vanaciesService.getAllVacancy(filterFields)
   }
   @Post('/:id/apply')
-  addFileInResume(@Param("id") vacancyId : string , @Body() file : PDF , @UserId() userId : string){
+  @UseInterceptors(FileInterceptor("file"))
+  uploadFile(@Param("id") vacancyId : string ,  @UserId() userId : string , @UploadedFile() file : Express.Multer.File){
     return this.vanaciesService.addFileInResume(vacancyId , file , userId)
+  }
+
+  @Post('get-file')
+  getFile(@Body('fileId') fileId : string){
+    return this.vanaciesService.getFile(fileId)
+  }
+
+  @Delete('delete-file')
+  deleteFile(@Body('fileId') fileId : string){
+    return this.vanaciesService.deleteFile(fileId)
   }
 }

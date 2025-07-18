@@ -97,13 +97,13 @@ export class Vacancy{
 
     @Prop({
         type: [{
-            file: String,
+            fileId: String,
             user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
         }],
         default : []
     })
     resumes: {
-        file: string;
+        fileId: string;
         user: mongoose.Schema.Types.ObjectId;
       }[];
 }
