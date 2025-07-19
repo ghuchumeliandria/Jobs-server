@@ -15,6 +15,10 @@ import { Status } from 'src/dto/status.dto';
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
+  @Get()
+  getAllCompanies(){
+    return 
+  }
   @Get("profile")
   companyProfile(@UserId() UserId : number ){
     return this.companiesService.companyProfile(UserId)

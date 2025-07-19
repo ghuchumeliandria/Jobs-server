@@ -14,6 +14,10 @@ export class CompaniesService {
     @InjectModel('vacancy') private vacancyModel : Model<Vacancy>,
   ){}
 
+   getAllCompany(){
+    return this.companyModel.find({status: "approved"})
+  }
+
  async companyProfile(id: number) {
   console.log(id)
     return await this.companyModel.findById(id)
