@@ -17,7 +17,7 @@ export class CompaniesController {
 
   @Get()
   getAllCompanies(){
-    return 
+    return this.companiesService.getAllCompany()
   }
   @Get("profile")
   companyProfile(@UserId() UserId : number ){
