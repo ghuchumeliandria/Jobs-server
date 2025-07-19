@@ -11,7 +11,7 @@ import { companyApproval } from './dto/companyApproval.dto';
 import { Status } from 'src/dto/status.dto';
 
 @Controller('company')
-@UseGuards(IsAuthGuard , IsCompany , IsApproved )
+
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
@@ -19,32 +19,32 @@ export class CompaniesController {
   getAllCompanies(){
     return this.companiesService.getAllCompany()
   }
+  @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @Get("profile")
   companyProfile(@UserId() UserId : number ){
     return this.companiesService.companyProfile(UserId)
   }
-
+  @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @Post("add-vacancy")
   addVacancy(@Body() addVacany : AddVacancy , @UserId() companyId : number ){
     return  this.companiesService.addVacancy(companyId , addVacany)
   }
-
+  @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @UseGuards(CurrentCompany)
   @Delete('vacancy-delete/:id')
   vacancyDelete(@Param('id') vacancyId : string , @UserId() companyId : string ){
     return this.companiesService.deleteVacancy(vacancyId , companyId)
   }
-
+  @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @UseGuards(CurrentCompany)
   @Patch('vacancy-update/:id')
   vacancyUpdate(@Param('id') vacancyId : string , @Body() updateVacancy : UpdateVacancy ){
     return this.companiesService.vacancyUpdate(vacancyId ,   updateVacancy)
   } 
-
+  @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @Get('vacancies')
   pendingVacancies(@UserId() companyId : string , @Query()  status : Status){
     return this.companiesService.companyVacancies(companyId , status)
   }
 
-  
 }
