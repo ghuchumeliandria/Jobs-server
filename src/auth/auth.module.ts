@@ -18,9 +18,9 @@ import { companySchema } from 'src/companies/schema/company.schema';
     MongooseModule.forFeature([
       {schema : userSchema , name : 'user'},
       {schema : companySchema , name : 'company'}
-    ])
+    ]),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService ],
 })
 export class AuthModule {}

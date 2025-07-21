@@ -89,7 +89,20 @@ export class AuthService {
         return {token}
     }
 
-    async getCurrentUserOrCompany(id){
+    async continueWithGoogle({fullName, email , avatar}){
+        let existUser = await this.userModel.findOne({email})
+
+        if(!existUser ) existUser = await this.userModel.create({email, fullName , avatar})
+
+            const payload = {
+                userId : existUser._id
+            }
+            const token =  this.jwtservice.sign(payload , {expiresIn : '2h'})
+
+            return {redirectUrl : `${process.env.FRONT_URL}` , token}
+    }
+
+    async getCurrentUserOrCompany(id : string){
         if(!isValidObjectId(id)) throw new BadRequestException("invalid id")
         const user = await this.userModel.findById(id)
         const company = await this.companyModel.findById(id)
