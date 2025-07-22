@@ -20,13 +20,13 @@ export class CompaniesController {
     return this.companiesService.getAllCompany()
   }
   @UseGuards(IsAuthGuard , IsCompany , IsApproved )
-  @Get("profile")
-  companyProfile(@UserId() UserId : number ){
-    return this.companiesService.companyProfile(UserId)
+  @Get("profile/:id")
+  companyProfile(@Param('id') id : string ){
+    return this.companiesService.companyProfile(id)
   }
   @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @Post("add-vacancy")
-  addVacancy(@Body() addVacany : AddVacancy , @UserId() companyId : number ){
+  addVacancy(@Body() addVacany : AddVacancy , @UserId() companyId : string ){
     return  this.companiesService.addVacancy(companyId , addVacany)
   }
   @UseGuards(IsAuthGuard , IsCompany , IsApproved )

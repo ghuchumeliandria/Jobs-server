@@ -26,6 +26,16 @@ export class AdminService {
         return await this.userModel.find()
     }
 
+    async getCompany(id : string){
+        if(!isValidObjectId(id)) throw new BadRequestException("invalid id")
+
+        const company = await this.companyModel.findById(id)
+        if(!company) throw new BadRequestException("Company not found")
+        
+        return company
+
+    }
+
     async companyApproval({status} : companyApproval, companyId : string){
         if(!isValidObjectId(companyId)) throw new BadRequestException("Invalid id")
 

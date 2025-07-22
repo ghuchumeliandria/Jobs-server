@@ -14,6 +14,12 @@ export class AdminController {
     return this.adminService.getAllCompanies(status)
   }
 
+  @Get('company/:id')
+  getCompany (@Param('id') id : string){
+    return this.adminService.getCompany(id)
+  }
+  
+
   @Get("users")
   getUsers(){
     return this.adminService.getUsers()

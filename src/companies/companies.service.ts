@@ -18,12 +18,13 @@ export class CompaniesService {
     return this.companyModel.find({status: "approved"})
   }
 
- async companyProfile(id: number) {
-  console.log(id)
-    return await this.companyModel.findById(id)
+  companyProfile(id: string) {
+    console.log(id)
+    if(!isValidObjectId(id)) throw new BadRequestException("invalid id")
+    return  id
   }
 
-  async addVacancy(companyId : number , {name, sallery , description , location} : AddVacancy){
+  async addVacancy(companyId : string , {name, sallery , description , location} : AddVacancy){
     if(!name || !sallery  || !description || !location) throw new BadRequestException("fields are required")
       if(!isValidObjectId(companyId)) throw new BadRequestException("invalid id")
 
