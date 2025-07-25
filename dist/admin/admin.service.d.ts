@@ -12,12 +12,30 @@ export declare class AdminService {
     } & {
         __v: number;
     })[] | undefined>;
-    getUsers(): Promise<(import("mongoose").Document<unknown, {}, User, {}> & User & {
+    getVacancies(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
-    })[]>;
+    })[], import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, {}, Vacancy, "find", {}>;
+    getUsers(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, User, {}> & User & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    })[], import("mongoose").Document<unknown, {}, User, {}> & User & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, {}, User, "find", {}>;
     getCompany(id: string): Promise<import("mongoose").Document<unknown, {}, Company, {}> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }>;
+    getVacancy(id: string): Promise<import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;

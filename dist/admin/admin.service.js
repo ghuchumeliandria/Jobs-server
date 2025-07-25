@@ -32,8 +32,11 @@ let AdminService = class AdminService {
             return await this.companyModel.find({ status });
         }
     }
-    async getUsers() {
-        return await this.userModel.find();
+    getVacancies() {
+        return this.vacancyModel.find().populate("company");
+    }
+    getUsers() {
+        return this.userModel.find();
     }
     async getCompany(id) {
         if (!(0, mongoose_2.isValidObjectId)(id))
@@ -42,6 +45,14 @@ let AdminService = class AdminService {
         if (!company)
             throw new common_1.BadRequestException("Company not found");
         return company;
+    }
+    async getVacancy(id) {
+        if (!(0, mongoose_2.isValidObjectId)(id))
+            throw new common_1.BadRequestException("invalid id");
+        const vacancy = await this.vacancyModel.findById(id);
+        if (!vacancy)
+            throw new common_1.BadRequestException("Company not found");
+        return vacancy;
     }
     async companyApproval({ status }, companyId) {
         if (!(0, mongoose_2.isValidObjectId)(companyId))

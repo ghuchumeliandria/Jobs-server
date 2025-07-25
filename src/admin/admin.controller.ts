@@ -19,6 +19,14 @@ export class AdminController {
     return this.adminService.getCompany(id)
   }
   
+  @Get("vacancies")
+  getVacancies(){
+    return this.adminService.getVacancies()
+  }
+  @Get('vacancy/:id')
+  getVacancy (@Param('id') id : string){
+    return this.adminService.getVacancy(id)
+  }
 
   @Get("users")
   getUsers(){

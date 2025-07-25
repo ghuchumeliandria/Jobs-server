@@ -29,6 +29,12 @@ let AdminController = class AdminController {
     getCompany(id) {
         return this.adminService.getCompany(id);
     }
+    getVacancies() {
+        return this.adminService.getVacancies();
+    }
+    getVacancy(id) {
+        return this.adminService.getVacancy(id);
+    }
     getUsers() {
         return this.adminService.getUsers();
     }
@@ -54,6 +60,19 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "getCompany", null);
+__decorate([
+    (0, common_1.Get)("vacancies"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "getVacancies", null);
+__decorate([
+    (0, common_1.Get)('vacancy/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "getVacancy", null);
 __decorate([
     (0, common_1.Get)("users"),
     __metadata("design:type", Function),

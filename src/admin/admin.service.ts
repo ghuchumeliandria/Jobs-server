@@ -22,8 +22,13 @@ export class AdminService {
            
     }
 
-    async getUsers(){
-        return await this.userModel.find()
+
+    getVacancies(){
+        return this.vacancyModel.find().populate("company")
+    }
+
+     getUsers(){
+        return  this.userModel.find()
     }
 
     async getCompany(id : string){
@@ -33,6 +38,15 @@ export class AdminService {
         if(!company) throw new BadRequestException("Company not found")
         
         return company
+
+    }
+    async getVacancy(id : string){
+        if(!isValidObjectId(id)) throw new BadRequestException("invalid id")
+
+        const vacancy = await this.vacancyModel.findById(id)
+        if(!vacancy) throw new BadRequestException("Company not found")
+        
+        return vacancy
 
     }
 

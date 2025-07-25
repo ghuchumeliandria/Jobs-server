@@ -13,11 +13,29 @@ export declare class AdminController {
     } & {
         __v: number;
     }>;
-    getUsers(): Promise<(import("mongoose").Document<unknown, {}, import("../users/schema/users.schema").User, {}> & import("../users/schema/users.schema").User & {
+    getVacancies(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, import("../companies/schema/company.schema").Vacancy, {}> & import("../companies/schema/company.schema").Vacancy & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
-    })[]>;
+    })[], import("mongoose").Document<unknown, {}, import("../companies/schema/company.schema").Vacancy, {}> & import("../companies/schema/company.schema").Vacancy & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, {}, import("../companies/schema/company.schema").Vacancy, "find", {}>;
+    getVacancy(id: string): Promise<import("mongoose").Document<unknown, {}, import("../companies/schema/company.schema").Vacancy, {}> & import("../companies/schema/company.schema").Vacancy & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }>;
+    getUsers(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, import("../users/schema/users.schema").User, {}> & import("../users/schema/users.schema").User & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    })[], import("mongoose").Document<unknown, {}, import("../users/schema/users.schema").User, {}> & import("../users/schema/users.schema").User & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, {}, import("../users/schema/users.schema").User, "find", {}>;
     companyApproval(companyId: string, status: companyApproval): Promise<{
         message: string;
         company: import("mongoose").Document<unknown, {}, import("../companies/schema/company.schema").Company, {}> & import("../companies/schema/company.schema").Company & {
