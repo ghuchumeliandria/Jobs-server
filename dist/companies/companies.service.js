@@ -26,6 +26,11 @@ let CompaniesService = class CompaniesService {
     getAllCompany() {
         return this.companyModel.find({ status: "approved" });
     }
+    getCompanyProfileForGuest(id) {
+        if (!(0, mongoose_2.isValidObjectId)(id))
+            throw new common_1.BadRequestException("invalid id");
+        return this.companyModel.findById(id).populate("vacansies");
+    }
     companyProfile(id) {
         console.log(id);
         if (!(0, mongoose_2.isValidObjectId)(id))

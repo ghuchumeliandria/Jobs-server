@@ -18,6 +18,11 @@ export class CompaniesService {
     return this.companyModel.find({status: "approved"})
   }
 
+  getCompanyProfileForGuest(id : string){
+    if(!isValidObjectId(id)) throw new BadRequestException("invalid id")
+    return this.companyModel.findById(id).populate("vacansies")
+  }
+
   companyProfile(id: string) {
     console.log(id)
     if(!isValidObjectId(id)) throw new BadRequestException("invalid id")

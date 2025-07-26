@@ -16,6 +16,15 @@ export declare class CompaniesService {
     } & {
         __v: number;
     }, {}, Company, "find", {}>;
+    getCompanyProfileForGuest(id: string): import("mongoose").Query<(import("mongoose").Document<unknown, {}, Company, {}> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }) | null, import("mongoose").Document<unknown, {}, Company, {}> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, {}, Company, "findOne", {}>;
     companyProfile(id: string): string;
     addVacancy(companyId: string, { name, sallery, description, location }: AddVacancy): Promise<{
         message: string;
@@ -41,9 +50,9 @@ export declare class CompaniesService {
             __v: number;
         }) | null;
     }>;
-    companyVacancies(companyId: string, { status }: Status): Promise<import("mongoose").Schema.Types.ObjectId[] | (import("mongoose").Document<unknown, {}, Company, {}> & Company & {
+    companyVacancies(companyId: string, { status }: Status): Promise<(import("mongoose").Document<unknown, {}, Company, {}> & Company & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
-    }) | null | undefined>;
+    }) | import("mongoose").Schema.Types.ObjectId[] | null | undefined>;
 }

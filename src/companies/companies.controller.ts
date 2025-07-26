@@ -19,6 +19,12 @@ export class CompaniesController {
   getAllCompanies(){
     return this.companiesService.getAllCompany()
   }
+
+  @Get('/:id')
+  getCompanyProfileForGuest(@Param("id") id : string){
+      return this.companiesService.getCompanyProfileForGuest(id)
+  }
+
   @UseGuards(IsAuthGuard , IsCompany , IsApproved )
   @Get("profile/:id")
   companyProfile(@Param('id') id : string ){
