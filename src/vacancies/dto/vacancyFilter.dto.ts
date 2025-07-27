@@ -13,4 +13,5 @@ export class VacancyFilter {
     @IsOptional()
     @IsString()
     location : string
+   
 }

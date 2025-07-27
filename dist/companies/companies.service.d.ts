@@ -50,9 +50,9 @@ export declare class CompaniesService {
             __v: number;
         }) | null;
     }>;
-    companyVacancies(companyId: string, { status }: Status): Promise<(import("mongoose").Document<unknown, {}, Company, {}> & Company & {
+    companyVacancies(companyId: string, { status }: Status): Promise<import("mongoose").Schema.Types.ObjectId[] | (import("mongoose").Document<unknown, {}, Company, {}> & Company & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
-    }) | import("mongoose").Schema.Types.ObjectId[] | null | undefined>;
+    }) | null | undefined>;
 }

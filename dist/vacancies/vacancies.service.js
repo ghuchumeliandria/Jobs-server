@@ -47,6 +47,11 @@ let VanaciesService = class VanaciesService {
         }
         return await this.vacancyModel.find(search).populate("company");
     }
+    getVacancy(id) {
+        if (!(0, mongoose_2.isValidObjectId)(id))
+            throw new common_1.BadRequestException("Invalid id");
+        return this.vacancyModel.findById(id).populate("company");
+    }
     async addFileInResume(vacancyId, file, userId) {
         if (!(0, mongoose_2.isValidObjectId)(vacancyId))
             throw new common_1.BadRequestException("invalid id");

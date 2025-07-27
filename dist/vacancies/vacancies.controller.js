@@ -27,6 +27,9 @@ let VanaciesController = class VanaciesController {
     getAllVacancy(filterFields) {
         return this.vanaciesService.getAllVacancy(filterFields);
     }
+    getVacancy(id) {
+        return this.vanaciesService.getVacancy(id);
+    }
     uploadFile(vacancyId, userId, file) {
         return this.vanaciesService.addFileInResume(vacancyId, file, userId);
     }
@@ -45,6 +48,13 @@ __decorate([
     __metadata("design:paramtypes", [vacancyFilter_dto_1.VacancyFilter]),
     __metadata("design:returntype", void 0)
 ], VanaciesController.prototype, "getAllVacancy", null);
+__decorate([
+    (0, common_1.Get)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], VanaciesController.prototype, "getVacancy", null);
 __decorate([
     (0, common_1.UseGuards)(isAuth_guard_1.IsAuthGuard),
     (0, common_1.Post)('/:id/apply'),

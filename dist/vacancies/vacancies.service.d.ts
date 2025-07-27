@@ -11,6 +11,15 @@ export declare class VanaciesService {
     } & {
         __v: number;
     })[]>;
+    getVacancy(id: string): import("mongoose").Query<(import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }) | null, import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, {}, Vacancy, "findOne", {}>;
     addFileInResume(vacancyId: string, file: Express.Multer.File, userId: string): Promise<false | {
         message: string;
         vacancy: (import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {

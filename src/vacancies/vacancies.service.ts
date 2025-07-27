@@ -16,8 +16,8 @@ export class VanaciesService {
 
     async getAllVacancy(vacancyFilter : VacancyFilter){
             
-            const {name , minSallery , maxSallery , location} = vacancyFilter
-            if(!name && !minSallery && !maxSallery && !location) return await this.vacancyModel.find({status : "approved"}).populate("company")
+            const {name , minSallery , maxSallery , location } = vacancyFilter
+            if(!name && !minSallery && !maxSallery && !location )  return await this.vacancyModel.find({status : "approved"}).populate("company")
             const search : FilterQuery<Vacancy> = {
                 status : "approved"
             }
@@ -28,6 +28,7 @@ export class VanaciesService {
               if (location) {
                 search.location = location;
               }
+             
             
               if (minSallery || maxSallery) {
                 search.sallery = {};
@@ -36,6 +37,11 @@ export class VanaciesService {
               }
             
               return await this.vacancyModel.find(search).populate("company");
+    }
+
+    getVacancy(id : string){
+        if(!isValidObjectId(id)) throw new BadRequestException("Invalid id")
+            return this.vacancyModel.findById(id).populate("company")
     }
 
     async addFileInResume(vacancyId : string , file : Express.Multer.File , userId : string){

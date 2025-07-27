@@ -48,9 +48,9 @@ export declare class CompaniesController {
             __v: number;
         }) | null;
     }>;
-    pendingVacancies(companyId: string, status: Status): Promise<(import("mongoose").Document<unknown, {}, import("./schema/company.schema").Company, {}> & import("./schema/company.schema").Company & {
+    pendingVacancies(companyId: string, status: Status): Promise<import("mongoose").Schema.Types.ObjectId[] | (import("mongoose").Document<unknown, {}, import("./schema/company.schema").Company, {}> & import("./schema/company.schema").Company & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
-    }) | import("mongoose").Schema.Types.ObjectId[] | null | undefined>;
+    }) | null | undefined>;
 }

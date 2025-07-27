@@ -15,6 +15,10 @@ export class VanaciesController {
   getAllVacancy(@Query() filterFields : VacancyFilter){
     return this.vanaciesService.getAllVacancy(filterFields)
   }
+  @Get('/:id')
+  getVacancy(@Param('id') id : string){
+    return this.vanaciesService.getVacancy(id)
+  }
   @UseGuards(IsAuthGuard)
   @Post('/:id/apply')
   @UseInterceptors(FileInterceptor("file"))
