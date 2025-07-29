@@ -26,7 +26,7 @@ let AwsS3Service = class AwsS3Service {
             region: process.env.MY_AWS_REGION
         });
     }
-    async uploadFile(fileId, file) {
+    async uploadPdf(fileId, file) {
         if (!fileId || !file)
             throw new common_1.BadRequestException("file is required");
         const config = {

@@ -18,7 +18,7 @@ export class AwsS3Service {
         })
     }
 
-    async uploadFile(fileId , file){
+    async uploadPdf(fileId , file){
         if(!fileId || !file) throw new BadRequestException("file is required")
 
         const config = {

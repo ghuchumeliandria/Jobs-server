@@ -61,7 +61,7 @@ __decorate([
 ], User.prototype, "avatar", void 0);
 __decorate([
     (0, mongoose_1.Prop)({
-        type: [mongoose_2.default.Schema.Types.ObjectId],
+        type: [{ type: mongoose_2.default.Schema.Types.ObjectId, ref: 'vacancy' }],
         default: []
     }),
     __metadata("design:type", Array)

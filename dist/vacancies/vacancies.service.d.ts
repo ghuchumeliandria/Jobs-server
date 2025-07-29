@@ -2,10 +2,12 @@ import { Model } from 'mongoose';
 import { Vacancy } from 'src/companies/schema/company.schema';
 import { VacancyFilter } from './dto/vacancyFilter.dto';
 import { AwsS3Service } from 'src/aws-s3/aws-s3.service';
+import { User } from 'src/users/schema/users.schema';
 export declare class VanaciesService {
     private vacancyModel;
+    private userModel;
     private awsS3Service;
-    constructor(vacancyModel: Model<Vacancy>, awsS3Service: AwsS3Service);
+    constructor(vacancyModel: Model<Vacancy>, userModel: Model<User>, awsS3Service: AwsS3Service);
     getAllVacancy(vacancyFilter: VacancyFilter): Promise<(import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
         _id: import("mongoose").Types.ObjectId;
     } & {
@@ -23,6 +25,11 @@ export declare class VanaciesService {
     addFileInResume(vacancyId: string, file: Express.Multer.File, userId: string): Promise<false | {
         message: string;
         vacancy: (import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
+            _id: import("mongoose").Types.ObjectId;
+        } & {
+            __v: number;
+        }) | null;
+        putApplieInUser: (import("mongoose").Document<unknown, {}, User, {}> & User & {
             _id: import("mongoose").Types.ObjectId;
         } & {
             __v: number;

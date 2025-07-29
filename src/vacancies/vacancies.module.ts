@@ -4,11 +4,13 @@ import { VanaciesController } from './vacancies.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { vacancySchema } from 'src/companies/schema/company.schema';
 import { AwsS3Module } from 'src/aws-s3/aws-s3.module';
+import { userSchema } from 'src/users/schema/users.schema';
 
 @Module({
   imports : [AwsS3Module,
     MongooseModule.forFeature([
-      {schema : vacancySchema , name : 'vacancy'}
+      {schema : vacancySchema , name : 'vacancy'},
+      {schema : userSchema , name : 'user'}
     ])
   ],
   controllers: [VanaciesController],

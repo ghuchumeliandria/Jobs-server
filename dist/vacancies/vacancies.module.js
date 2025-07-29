@@ -13,6 +13,7 @@ const vacancies_controller_1 = require("./vacancies.controller");
 const mongoose_1 = require("@nestjs/mongoose");
 const company_schema_1 = require("../companies/schema/company.schema");
 const aws_s3_module_1 = require("../aws-s3/aws-s3.module");
+const users_schema_1 = require("../users/schema/users.schema");
 let VanaciesModule = class VanaciesModule {
 };
 exports.VanaciesModule = VanaciesModule;
@@ -20,7 +21,8 @@ exports.VanaciesModule = VanaciesModule = __decorate([
     (0, common_1.Module)({
         imports: [aws_s3_module_1.AwsS3Module,
             mongoose_1.MongooseModule.forFeature([
-                { schema: company_schema_1.vacancySchema, name: 'vacancy' }
+                { schema: company_schema_1.vacancySchema, name: 'vacancy' },
+                { schema: users_schema_1.userSchema, name: 'user' }
             ])
         ],
         controllers: [vacancies_controller_1.VanaciesController],

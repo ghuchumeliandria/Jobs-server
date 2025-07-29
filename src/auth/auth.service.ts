@@ -92,7 +92,15 @@ export class AuthService {
 
     async getCurrentUserOrCompany(id : string){
         if(!isValidObjectId(id)) throw new BadRequestException("invalid id")
-        const user = await this.userModel.findById(id)
+         const user = await this.userModel
+        .findById(id)
+        .populate({
+          path: 'applies',
+          populate: {
+            path: 'company', 
+            model: 'company',
+          },
+        });
         const company = await this.companyModel.findById(id)
         if(company) return company
         if(user) return user

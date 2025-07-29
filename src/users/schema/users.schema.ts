@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
+import { Vacancy } from "src/companies/schema/company.schema";
 @Schema({timestamps : true})
 export class User {
     @Prop({
@@ -32,7 +33,7 @@ export class User {
     avatar : string
 
     @Prop({
-        type: [mongoose.Schema.Types.ObjectId],
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'vacancy' }],
         default : []
     })
     applies : mongoose.Schema.Types.ObjectId[]

@@ -90,7 +90,15 @@ let AuthService = class AuthService {
     async getCurrentUserOrCompany(id) {
         if (!(0, mongoose_2.isValidObjectId)(id))
             throw new common_1.BadRequestException("invalid id");
-        const user = await this.userModel.findById(id);
+        const user = await this.userModel
+            .findById(id)
+            .populate({
+            path: 'applies',
+            populate: {
+                path: 'company',
+                model: 'company',
+            },
+        });
         const company = await this.companyModel.findById(id);
         if (company)
             return company;

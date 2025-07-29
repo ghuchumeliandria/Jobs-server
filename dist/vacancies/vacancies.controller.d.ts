@@ -24,6 +24,11 @@ export declare class VanaciesController {
         } & {
             __v: number;
         }) | null;
+        putApplieInUser: (import("mongoose").Document<unknown, {}, import("../users/schema/users.schema").User, {}> & import("../users/schema/users.schema").User & {
+            _id: import("mongoose").Types.ObjectId;
+        } & {
+            __v: number;
+        }) | null;
     }>;
     getFile(fileId: string): Promise<string | undefined>;
     deleteFile(fileId: string): Promise<string>;
