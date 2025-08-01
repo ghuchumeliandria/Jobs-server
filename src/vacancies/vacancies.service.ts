@@ -6,12 +6,14 @@ import { VacancyFilter } from './dto/vacancyFilter.dto';
 import { AwsS3Service } from 'src/aws-s3/aws-s3.service';
 import { v4 as uuidv4 } from 'uuid';
 import { User } from 'src/users/schema/users.schema';
+import { Resumes } from 'src/resume/schema/resume.schema';
 @Injectable()
 export class VanaciesService {
 
     constructor(
         @InjectModel("vacancy") private vacancyModel : Model<Vacancy>,
         @InjectModel("user") private userModel : Model<User>,
+        @InjectModel("resumes") private resumeModel : Model<Resumes>,
         private awsS3Service : AwsS3Service
 
     ){}
@@ -54,6 +56,7 @@ export class VanaciesService {
         if(fileType !== 'pdf') throw new BadRequestException("Only pdf type files")
         const fileId = `application/${uuidv4()}.${fileType}`
         await this.awsS3Service.uploadPdf(fileId , file)
+        await this.resumeModel.create({fileId , user : userId})
 
         const vacancy = await this.vacancyModel.findByIdAndUpdate(vacancyId , {$push : {resumes : {fileId , user : userId} }} , {new : true})
         const putApplieInUser = await this.userModel.findByIdAndUpdate(userId ,{$push : {applies : vacancyId}} )

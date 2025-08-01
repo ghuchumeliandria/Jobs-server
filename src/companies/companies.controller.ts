@@ -7,7 +7,6 @@ import { IsApproved } from './guards/isApproved.guard';
 import { AddVacancy } from './dto/addVacancy.dto';
 import { CurrentCompany } from './guards/currentCompany.guard';
 import { UpdateVacancy } from './dto/updateVacancy.dto';
-import { companyApproval } from './dto/companyApproval.dto';
 import { Status } from 'src/dto/status.dto';
 
 @Controller('company')

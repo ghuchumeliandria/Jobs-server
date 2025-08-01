@@ -101,7 +101,13 @@ export class AuthService {
             model: 'company',
           },
         });
-        const company = await this.companyModel.findById(id)
+        const company = await this.companyModel.findById(id) .populate({
+            path: 'vacansies',
+            populate: {
+              path: 'resumes',
+              model : 'resumes'
+            }
+          })
         if(company) return company
         if(user) return user
     }

@@ -3,11 +3,13 @@ import { Vacancy } from 'src/companies/schema/company.schema';
 import { VacancyFilter } from './dto/vacancyFilter.dto';
 import { AwsS3Service } from 'src/aws-s3/aws-s3.service';
 import { User } from 'src/users/schema/users.schema';
+import { Resumes } from 'src/resume/schema/resume.schema';
 export declare class VanaciesService {
     private vacancyModel;
     private userModel;
+    private resumeModel;
     private awsS3Service;
-    constructor(vacancyModel: Model<Vacancy>, userModel: Model<User>, awsS3Service: AwsS3Service);
+    constructor(vacancyModel: Model<Vacancy>, userModel: Model<User>, resumeModel: Model<Resumes>, awsS3Service: AwsS3Service);
     getAllVacancy(vacancyFilter: VacancyFilter): Promise<(import("mongoose").Document<unknown, {}, Vacancy, {}> & Vacancy & {
         _id: import("mongoose").Types.ObjectId;
     } & {

@@ -19,6 +19,7 @@ const admin_module_1 = require("./admin/admin.module");
 const vacancies_module_1 = require("./vacancies/vacancies.module");
 const aws_s3_module_1 = require("./aws-s3/aws-s3.module");
 const aws_s3_service_1 = require("./aws-s3/aws-s3.service");
+const resume_module_1 = require("./resume/resume.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,7 +28,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             mongoose_1.MongooseModule.forRoot(process.env.MONGO_URL),
-            auth_module_1.AuthModule, users_module_1.UsersModule, companies_module_1.CompaniesModule, admin_module_1.AdminModule, vacancies_module_1.VanaciesModule, aws_s3_module_1.AwsS3Module
+            auth_module_1.AuthModule, users_module_1.UsersModule, companies_module_1.CompaniesModule, admin_module_1.AdminModule, vacancies_module_1.VanaciesModule, aws_s3_module_1.AwsS3Module, resume_module_1.ResumeModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, aws_s3_service_1.AwsS3Service],
